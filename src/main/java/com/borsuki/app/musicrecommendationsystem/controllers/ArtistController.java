@@ -1,7 +1,7 @@
-package com.borsuki.app.music_recommendation_system.controllers;
+package com.borsuki.app.musicrecommendationsystem.controllers;
 
-import com.borsuki.app.music_recommendation_system.dtos.ArtistDto;
-import com.borsuki.app.music_recommendation_system.services.ArtistService;
+import com.borsuki.app.musicrecommendationsystem.dtos.ArtistDto;
+import com.borsuki.app.musicrecommendationsystem.services.ArtistService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
-package com.borsuki.app.music_recommendation_system.services;
+package com.borsuki.app.musicrecommendationsystem.services;
 
-import com.borsuki.app.music_recommendation_system.entities.Artist;
-import com.borsuki.app.music_recommendation_system.repositories.ArtistRepository;
+import com.borsuki.app.musicrecommendationsystem.entities.Artist;
+import com.borsuki.app.musicrecommendationsystem.repositories.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

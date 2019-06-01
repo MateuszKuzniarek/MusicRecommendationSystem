@@ -1,4 +1,4 @@
-package com.borsuki.app.music_recommendation_system.dtos;
+package com.borsuki.app.musicrecommendationsystem.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.borsuki.app.music_recommendation_system;
+package com.borsuki.app.musicrecommendationsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

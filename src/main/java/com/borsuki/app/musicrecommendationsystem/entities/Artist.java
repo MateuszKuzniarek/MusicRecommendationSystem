@@ -1,4 +1,4 @@
-package com.borsuki.app.music_recommendation_system.entities;
+package com.borsuki.app.musicrecommendationsystem.entities;
 
 import lombok.Getter;
 import lombok.Setter;

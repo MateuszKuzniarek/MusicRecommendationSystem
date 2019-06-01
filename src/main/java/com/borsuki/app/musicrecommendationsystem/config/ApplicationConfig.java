@@ -1,4 +1,4 @@
-package com.borsuki.app.music_recommendation_system.config;
+package com.borsuki.app.musicrecommendationsystem.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
