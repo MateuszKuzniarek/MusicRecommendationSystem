@@ -5,9 +5,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class ArtistDto {
 
-    private Long id;
+    private String id;
 
     private String name;
+
+    public ArtistDto(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public ArtistDto() {
+
+    }
 }
