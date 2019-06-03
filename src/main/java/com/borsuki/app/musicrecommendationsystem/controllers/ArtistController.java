@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/artists")
+@RequestMapping("/artists")
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class ArtistController {
 
