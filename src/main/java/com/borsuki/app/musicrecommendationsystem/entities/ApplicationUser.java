@@ -29,6 +29,9 @@ public class ApplicationUser implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
     @Override
     public boolean equals(Object object) {
         if (this == object) { return true; }
