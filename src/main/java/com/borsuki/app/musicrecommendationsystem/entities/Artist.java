@@ -6,8 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -17,16 +15,19 @@ import javax.persistence.Id;
 public class Artist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column(name = "name")
     private String name;
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) { return true; }
-        if (!(object instanceof Artist)) { return false; }
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Artist)) {
+            return false;
+        }
 
         Artist artist = (Artist) object;
 
