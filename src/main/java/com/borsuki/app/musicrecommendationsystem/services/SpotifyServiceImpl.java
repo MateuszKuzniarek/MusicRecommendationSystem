@@ -1,7 +1,6 @@
 package com.borsuki.app.musicrecommendationsystem.services;
 
 import com.borsuki.app.musicrecommendationsystem.dtos.ArtistDto;
-import com.borsuki.app.musicrecommendationsystem.entities.Artist;
 import com.borsuki.app.musicrecommendationsystem.externalAPI.SpotifyAPI;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,15 +38,19 @@ public class SpotifyServiceImpl implements SpotifyService {
         if (artistId.equals(""))
             throw new Exception();
         artistName = spotifyAPI.getArtist(artistId, accessToken);
-        ArtistDto artist = new ArtistDto(artistId, artistName);
-        return artist;
+        return new ArtistDto(artistId, artistName);
     }
     @Override
-    public ArtistDto getArtistById(String artistId) throws IOException {
-        accessToken = spotifyAPI.getAccessToken();
+    public ArtistDto getArtistById(String artistId)  {
         ArtistDto result = new ArtistDto();
-        result.setId(artistId);
-        result.setName(spotifyAPI.getArtist(artistId,accessToken));
+        try {
+            accessToken = spotifyAPI.getAccessToken();
+            result.setId(artistId);
+            result.setName(spotifyAPI.getArtist(artistId, accessToken).replace("\"",""));
+        }
+         catch (IOException e) {
+            e.getMessage();
+        }
         return result;
     }
 
@@ -55,9 +58,8 @@ public class SpotifyServiceImpl implements SpotifyService {
     public List<ArtistDto> getRelatedArtists(String artistId) throws IOException {
         accessToken = spotifyAPI.getAccessToken();
         Map<String, String> artists = spotifyAPI.getRelated(artistId, accessToken);
-        List<ArtistDto> lists = artists.entrySet().stream()
-                .map(entry -> new ArtistDto(entry.getKey(), entry.getValue())).collect(Collectors.toList());
 
-        return lists;
+        return artists.entrySet().stream()
+                .map(entry -> new ArtistDto(entry.getKey(), entry.getValue())).collect(Collectors.toList());
     }
 }

@@ -33,8 +33,8 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public List<Likes> getAllLikes(ApplicationUser user_id) {
-        List<Likes> result = new ArrayList();
-        applicationUserArtistRepository.findAllByUser_id(user_id).forEach(result::add);
+        ArrayList result = new ArrayList();
+        result.addAll(applicationUserArtistRepository.findAllByUser_id(user_id));
         return result;
     }
 

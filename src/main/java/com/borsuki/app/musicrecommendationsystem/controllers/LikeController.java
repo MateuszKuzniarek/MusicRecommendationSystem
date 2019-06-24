@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,12 +35,14 @@ public class LikeController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllLikes(Principal principal) throws IOException {
+    public ResponseEntity<?> getAllLikes(Principal principal) {
         List<LikesDto> likeDtos = likeService.getAllLikes(applicationUserService.loadUserByUsername(principal.getName())).stream()
                 .map(likes -> modelMapper.map(likes, LikesDto.class))
                 .collect(Collectors.toList());
-
-        return ResponseEntity.status(HttpStatus.OK).body(likeDtos);
+        List<ArtistDto> artistDtos = likeDtos.stream()
+                .map(e -> spotifyService.getArtistById(e.getArtist_id()))
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(artistDtos);
     }
 
     @PostMapping
