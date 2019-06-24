@@ -11,4 +11,6 @@ public interface SpotifyService {
 
     List<ArtistDto> getRelatedArtists(String artistId) throws IOException;
 
+    ArtistDto getArtistById(String artistId) throws IOException;
+
 }
