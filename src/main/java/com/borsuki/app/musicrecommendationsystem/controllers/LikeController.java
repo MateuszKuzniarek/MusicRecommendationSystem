@@ -35,8 +35,6 @@ public class LikeController {
     }
 
     @GetMapping
-    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true,
-            paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     public ResponseEntity<?> getAllLikes(Principal principal) {
         List<LikesDto> likeDtos = likeService.getAllLikes(applicationUserService.loadUserByUsername(principal.getName())).stream()
                 .map(likes -> modelMapper.map(likes, LikesDto.class))
