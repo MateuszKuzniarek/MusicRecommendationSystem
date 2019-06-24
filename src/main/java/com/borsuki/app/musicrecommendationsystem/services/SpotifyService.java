@@ -10,7 +10,8 @@ public interface SpotifyService {
     ArtistDto getArtist(String artistName) throws Exception;
 
     List<ArtistDto> getRelatedArtists(String artistId) throws IOException;
-
+    
     ArtistDto getArtistById(String artistId) ;
+
 
 }

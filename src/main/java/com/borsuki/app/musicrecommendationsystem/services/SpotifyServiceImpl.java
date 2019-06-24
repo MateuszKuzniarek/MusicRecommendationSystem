@@ -1,6 +1,7 @@
 package com.borsuki.app.musicrecommendationsystem.services;
 
 import com.borsuki.app.musicrecommendationsystem.dtos.ArtistDto;
+import com.borsuki.app.musicrecommendationsystem.entities.Artist;
 import com.borsuki.app.musicrecommendationsystem.externalAPI.SpotifyAPI;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +52,14 @@ public class SpotifyServiceImpl implements SpotifyService {
          catch (IOException e) {
             e.getMessage();
         }
+        return result;
+    }
+    @Override
+    public ArtistDto getArtistById(String artistId) throws IOException {
+        accessToken = spotifyAPI.getAccessToken();
+        ArtistDto result = new ArtistDto();
+        result.setId(artistId);
+        result.setName(spotifyAPI.getArtist(artistId,accessToken));
         return result;
     }
 
