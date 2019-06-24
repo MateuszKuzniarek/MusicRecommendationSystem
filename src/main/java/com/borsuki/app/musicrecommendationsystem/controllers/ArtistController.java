@@ -2,6 +2,7 @@ package com.borsuki.app.musicrecommendationsystem.controllers;
 
 import com.borsuki.app.musicrecommendationsystem.dtos.ArtistDto;
 import com.borsuki.app.musicrecommendationsystem.services.ArtistService;
+import io.swagger.annotations.ApiImplicitParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,8 @@ public class ArtistController {
     }
 
     @GetMapping
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true,
+            paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     public ResponseEntity<List<ArtistDto>> getAllArtists() {
         List<ArtistDto> artistDtos = artistService.getAllArtists().stream()
                 .map(artist -> modelMapper.map(artist, ArtistDto.class)).collect(Collectors.toList());
