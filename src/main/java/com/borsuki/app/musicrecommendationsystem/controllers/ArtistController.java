@@ -2,6 +2,7 @@ package com.borsuki.app.musicrecommendationsystem.controllers;
 
 import com.borsuki.app.musicrecommendationsystem.dtos.ArtistDto;
 import com.borsuki.app.musicrecommendationsystem.services.ArtistService;
+import com.borsuki.app.musicrecommendationsystem.services.SpotifyService;
 import io.swagger.annotations.ApiImplicitParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,22 +20,21 @@ import java.util.stream.Collectors;
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class ArtistController {
 
-    private final ArtistService artistService;
-
-    private final ModelMapper modelMapper;
+    private final SpotifyService spotifyService;
 
     @Autowired
-    public ArtistController(ArtistService artistService, ModelMapper modelMapper) {
-        this.artistService = artistService;
-        this.modelMapper = modelMapper;
+    public ArtistController(SpotifyService spotifyService) {
+        this.spotifyService = spotifyService;
     }
 
-    @GetMapping
+    @PostMapping
     @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true,
             paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
-    public ResponseEntity<List<ArtistDto>> getAllArtists() {
-        List<ArtistDto> artistDtos = artistService.getAllArtists().stream()
-                .map(artist -> modelMapper.map(artist, ArtistDto.class)).collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(artistDtos);
+    public ResponseEntity<?> getArtist(@RequestBody ArtistDto artistDto) {
+        ArtistDto result = spotifyService.getArtistById(artistDto.getId());
+        result.setName(result.getName().replace("\"", ""));
+        if (result.getName().equals(""))
+            return ResponseEntity.status(HttpStatus.OK).body("Artist not found");
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
