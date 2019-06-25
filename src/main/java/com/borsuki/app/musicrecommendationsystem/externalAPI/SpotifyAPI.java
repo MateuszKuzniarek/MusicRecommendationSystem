@@ -67,11 +67,12 @@ public class SpotifyAPI {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.set("Authorization", "Bearer " + accessToken);
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(spotifySearchURL)
-                .queryParam("q", item)
+                .queryParam("q", item.replace(" ", "+"))
                 .queryParam("type", "artist")
-                .queryParam("marker", "US")
+                .queryParam("market", "US")
                 .queryParam("limit", "1")
                 .queryParam("offset", "0");
+        System.out.println(builder.toUriString());
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
         HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
         JsonNode jsonNode = objectMapper.readTree(response.getBody()).path("artists").path("items");
