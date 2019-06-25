@@ -46,8 +46,10 @@ public class LikeController {
         List<LikesDto> likeDtos = likeService.getAllLikes(applicationUserService.loadUserByUsername(principal.getName())).stream()
                 .map(likes -> modelMapper.map(likes, LikesDto.class))
                 .collect(Collectors.toList());
-
-        return ResponseEntity.status(HttpStatus.OK).body(likeDtos);
+        List<ArtistDto> artistDtos = likeDtos.stream()
+                .map(e -> spotifyService.getArtistById(e.getArtist_id()))
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(artistDtos);
     }
 
     @PostMapping
