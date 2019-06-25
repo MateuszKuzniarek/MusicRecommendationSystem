@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/like")
-public class LikeController {
+public class LikeController extends BaseController{
 
     private final LikeService likeService;
     private final ApplicationUserServiceImpl applicationUserService;
