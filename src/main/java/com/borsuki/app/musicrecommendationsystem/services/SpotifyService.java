@@ -13,5 +13,4 @@ public interface SpotifyService {
 
     ArtistDto getArtistById(String artistId) ;
 
-
 }
