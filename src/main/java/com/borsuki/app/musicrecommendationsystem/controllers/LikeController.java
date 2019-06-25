@@ -35,6 +35,8 @@ public class LikeController {
     }
 
     @GetMapping
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true,
+            paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     public ResponseEntity<?> getAllLikes(Principal principal) {
         List<LikesDto> likeDtos = likeService.getAllLikes(applicationUserService.loadUserByUsername(principal.getName())).stream()
                 .map(likes -> modelMapper.map(likes, LikesDto.class))
@@ -46,6 +48,8 @@ public class LikeController {
     }
 
     @PostMapping
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true,
+            paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     public ResponseEntity giveLike(@RequestBody ArtistDto artistDto, Principal principal) throws Exception {
         Likes result = new Likes();
         result.setUser_id(applicationUserService.loadUserByUsername(principal.getName()));
