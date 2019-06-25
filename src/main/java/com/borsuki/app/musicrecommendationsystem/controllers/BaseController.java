@@ -11,4 +11,9 @@ public class BaseController {
     public ResponseEntity handleException(ApplicationException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleException(Exception exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+    }
 }

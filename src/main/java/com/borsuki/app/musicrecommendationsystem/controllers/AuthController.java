@@ -4,6 +4,7 @@ import com.borsuki.app.musicrecommendationsystem.dtos.AuthDto;
 import com.borsuki.app.musicrecommendationsystem.dtos.JwtToken;
 import com.borsuki.app.musicrecommendationsystem.security.JwtTokenUtil;
 import com.borsuki.app.musicrecommendationsystem.services.ApplicationUserServiceImpl;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/auth")
 @Transactional(propagation = Propagation.REQUIRES_NEW)
-public class AuthController {
+public class AuthController extends BaseController {
 
     private final AuthenticationManager authenticationManager;
 
